@@ -1,0 +1,47 @@
+//Triangle Code
+//===============================================================
+void drawTriangle()
+{
+	glBegin(GL_POLYGON);
+	glVertex2f(x1, y1);
+	glVertex2f(x1, y2);
+	glVertex2f(x2, y2);
+	glVertex2f(x2, y1);
+	glVertex2f(x3, y3);
+	glVertex2f(x3, y3);
+
+	glEnd();
+
+	glFlush();
+}
+
+void createTriangle(GLint button, GLint state, GLint x, GLint y)
+{
+	static int first = 1;
+	static int second = 1;
+
+	if (state == GLUT_DOWN && button == GLUT_LEFT_BUTTON)
+	{
+		if (first)
+		{
+			x1 = x;
+			y1 = hh - y;
+			first = !first;
+		}
+		else if(!first && second)
+		{
+			x2 = x;
+			y2 = hh - y;
+			second = !second;
+		}
+		else
+		{
+			x3 = x;
+			y3 = hh - y;
+			drawTriangle();
+		}
+		
+	}
+
+	return;
+}
